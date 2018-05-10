@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>New York Times Search</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/flatly/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+</head>
+
+<div class="container">
+
+    <!-- Jumbotron for Title -->
+    <div class="jumbotron" style="background-color: darkblue; color: white;">
+        <h1 class="text-center"><strong>New York Times Search</strong></h1>
+   </div>
+   
+    <div class="row"> 
+        <div class="col-sm-12">
+        <br>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong>Search Parameters</strong></h3>
+                </div>
+                <div class="panel-body">
+
+                    <form role="form">
+
+                      <div class="form-group">
+                        <label for="search">Search Term:</label>
+                        <input type="text" class="form-control" id="searchTerm">
+                      </div>
+
+                      <div class="form-group">
+                        <label for="pwd">Number of Records to Retrieve:</label>
+                        <select class="form-control" id="numRecordsSelect">
+                           <option value = "1"> 1 </option>
+                           <option value = "2"> 2 </option>
+                           <option value = "3"> 3 </option>
+                           <option value = "4"> 4 </option>
+                           <option value = "5"> 5 </option>
+                           <option value = "6"> 6 </option>
+                           <option value = "7"> 7 </option>
+                           <option value = "8"> 8 </option>
+                           <option value = "9"> 9 </option>
+                           <option value = "10"> 10 </option>
+
+                        </select>              
+                      </div>
+
+                      <div class="form-group">
+                        <label for="startYear">Start Year (Optional):</label>
+                        <input type="text" class="form-control" id="startYear">
+                     </div>
+                     
+                      <div class="form-group">
+                        <label for="endYear">End Year (Optional):</label>
+                        <input type="text" class="form-control" id="endYear">
+                     </div>
+                     
+                      <button type="submit" class="btn btn-default" id="runSearch">Search</button>
+                       <button type="button" class="btn btn-default" id="clearAll">Clear Results</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-12">
+        <br>
+
+            
+            <div class="panel panel-primary">
+
+                <div class="panel-heading">
+                    <h3 class="panel-title"><strong> Top Articles</strong></h3>
+                </div>
+
+                <div class="panel-body" id="wellSection">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script src="https://code.jquery.com/jquery.js"></script>
+
+
+<script type="text/javascript">
+    $("#runSearch").on("click", function() {
+        console.log("hello");
+
+    // Search term
+    // q
+
+    // Num of Records
+    // <= 10, for loop through each page index 0-9
+
+    // Start Year
+
+    // End Year
+
+    //   var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+    //     url += '?' + $.param({
+    //         'api-key': "",
+    //         'begin_date': "20121101"
+    //     });
+
+    // var query = $("#searchTerm").val();
+    // var apiKey = "d0e74c51cadf461fa1140c7e0583d96c";
+    // var numRecordsSelect = $("#numRecordsSelect").val()
+    // var startYear = $("#startYear").val();
+    // var endYear = $("#endYear").val();
+
+    var query = "trump";
+    var apiKey = "d0e74c51cadf461fa1140c7e0583d96c";
+    // var numRecordsSelect = "1";
+    var startYear = "20160101";
+    var endYear = "20170101";
+    var queryURL = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=" +
+        apiKey + "&q=" + query +
+        "&begin_date=" + startYear +
+        "&end_date=" + endYear;
+
+        console.log(queryURL);
+
+    $.ajax({
+        url: queryURL,
+        method: 'GET',
+    }).done(function(result) {
+        console.log(result);
+    }).fail(function(err) {
+        throw err;
+    });
+    });
+
+</script>
+
+</body>
+</html>
